@@ -1,0 +1,57 @@
+{
+  "framework": "playwright",
+  "language": "typescript",
+
+  "execution": {
+    "parallel": true,
+    "workers": 4,
+    "retries": 1,
+    "timeout": 30000
+  },
+
+  "projectStructure": {
+    "tests": "tests/",
+    "pages": "pages/",
+    "components": "components/",
+    "fixtures": "fixtures/",
+    "testData": "test-data/"
+  },
+
+  "locatorStrategy": {
+    "priority": [
+      "getByTestId",
+      "getByRole",
+      "getByLabel",
+      "text",
+      "css",
+      "xpath"
+    ],
+    "avoid": ["nth-child"]
+  },
+
+  "frameworkRules": {
+    "usePageObjectModel": true,
+    "useComponentObjects": true,
+    "returnLocatorsFromPages": true,
+    "noAssertionsInPageObjects": true
+  },
+
+  "testDesign": {
+    "tagging": ["smoke", "regression", "api", "ui"],
+    "fixtureDriven": true,
+    "dynamicTestData": true,
+    "networkMockingPreferred": true
+  },
+
+  "selfHealing": {
+    "strategy": "testId-first",
+    "aiEnabled": true,
+    "domChangeTolerance": "medium"
+  },
+
+  "ciHints": {
+    "headless": true,
+    "trace": "retain-on-failure",
+    "video": "on-first-retry"
+  }
+}

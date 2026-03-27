@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Locator / Synchronization Issue",
+    "matchedStatuses": ["broken", "failed"],
+    "messageRegex": ".*Timeout.*locator.*|.*waiting for.*"
+  },
+  {
+    "name": "Automation Script Bug",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*is not a function.*|.*TypeError.*|.*ReferenceError.*"
+  },
+  {
+    "name": "Functional / Product Assertion Failure",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*expect\\(received\\).*toBe.*|.*Expected:.*Received:.*"
+  },
+  {
+    "name": "Test Data Issue",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*NoSuchElement.*|.*TestData.*|.*undefined.*"
+  },
+  {
+    "name": "API Failure",
+    "matchedStatuses": ["failed", "broken"],
+    "messageRegex": ".*500.*|.*502.*|.*503.*|.*API.*"
+  },
+  {
+    "name": "Assertion Failure (Product Bug)",
+    "matchedStatuses": ["failed"],
+    "messageRegex": ".*expect.*|.*AssertionError.*"
+  },
+  {
+    "name": "Environment / Network Issue",
+    "matchedStatuses": ["broken"],
+    "messageRegex": ".*ECONNREFUSED.*|.*net::ERR.*"
+  }
+]

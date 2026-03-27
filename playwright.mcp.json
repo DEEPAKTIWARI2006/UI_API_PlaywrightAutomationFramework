@@ -3,9 +3,9 @@
   "language": "typescript",
 
   "execution": {
-    "parallel": true,
-    "workers": 4,
-    "retries": 1,
+    "parallel": false,
+    "workers": 1,
+    "retries": 0,
     "timeout": 30000
   },
 

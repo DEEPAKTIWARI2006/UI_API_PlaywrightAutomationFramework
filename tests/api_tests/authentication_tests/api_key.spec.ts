@@ -2,7 +2,7 @@
 
 import { test, expect } from '@playwright/test';
 
-test('API Key Example', async ({ request }) => {
+test('API Key Example @smoke @api', async ({ request }) => {
     const response = await request.get('https://api.example.com/v1/weather', {
         headers: {
             'x-api-key': 'your-secret-api-key-here'

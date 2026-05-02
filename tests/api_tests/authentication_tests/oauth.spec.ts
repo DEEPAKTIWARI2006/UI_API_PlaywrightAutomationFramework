@@ -3,7 +3,7 @@
 
 import { test, expect } from '@playwright/test';
 
-test('OAuth 2.0 Flow Example', async ({ request }) => {
+test('OAuth 2.0 Flow Example @regression @api', async ({ request }) => {
   // 1. Get the Access Token
   const authResponse = await request.post('https://auth.example.com/token', {
     form: {

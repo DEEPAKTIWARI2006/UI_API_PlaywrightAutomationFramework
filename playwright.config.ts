@@ -64,6 +64,9 @@ export default defineConfig({
       use: { ...devices['Desktop Chrome'] },
     },
 
+    { name: 'ui', testDir: './tests/ui' },
+    { name: 'api', testDir: './tests/api' },
+
     {
       name: 'setup-admin',
       testMatch: /admin\.setup\.ts/

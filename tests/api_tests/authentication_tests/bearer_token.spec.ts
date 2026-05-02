@@ -7,7 +7,7 @@
 
 import { test, expect } from '@playwright/test';
 
-test('Bearer Token Example', async ({ request }) => {
+test('Bearer Token Example @regression @api', async ({ request }) => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Your JWT
 
     const response = await request.get('https://api.example.com/user/profile', {

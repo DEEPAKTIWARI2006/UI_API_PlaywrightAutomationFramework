@@ -3,7 +3,7 @@ import * as allure from 'allure-js-commons';
 
 function getTagValue(title: string, regex: RegExp): string | null {
     const match = regex.exec(title);
-    return match && match[1] ? match[1] : null;
+    return match?.[1] ?? null;
 }
 
 export async function applyAllureTags() {

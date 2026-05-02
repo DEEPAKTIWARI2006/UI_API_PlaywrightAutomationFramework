@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('Basic Auth Example', async ({ request }) => {
+test('Basic Auth Example @smoke @api', async ({ request }) => {
   // Credentials: 'username' and 'password'
   // Playwright handles the Base64 encoding for you
   const response = await request.get('https://api.example.com/data', {

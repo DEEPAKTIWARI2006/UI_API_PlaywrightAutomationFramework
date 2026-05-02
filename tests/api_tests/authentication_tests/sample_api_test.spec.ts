@@ -1,6 +1,6 @@
 import { test, expect, request } from '@playwright/test';
 
-test('CRUD API Test', async () => {
+test('CRUD API Test @regression @api', async () => {
 
   const apiContext = await request.newContext({
     baseURL: 'https://api.company.com'

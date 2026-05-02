@@ -1,5 +1,7 @@
 // Most APIs expect the key in the headers, though some allow it in the URL.
 
+import { test, expect } from '@playwright/test';
+
 test('API Key Example', async ({ request }) => {
     const response = await request.get('https://api.example.com/v1/weather', {
         headers: {

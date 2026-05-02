@@ -24,7 +24,7 @@ test.describe('Login & Storage State functionality test set', () => {
         });
     });
 
-    test(`Use StorageState to skip login @admin @feature:Dashboard @story:Skip Login @severity:critical`, async ({ page }) => {
+    test.only(`Use StorageState to skip login @admin @feature:Dashboard @story:Skip Login @severity:critical`, async ({ page }) => {
         const login_page = new LoginPage(page);
 
         await test.step('Entering Email ID to Sign Up', async () => {
@@ -35,22 +35,4 @@ test.describe('Login & Storage State functionality test set', () => {
             await expect(login_page.dashboardHeader()).toBeVisible();
         });
     });
-
-    test('Demo test -2 @feature:Demo @story:Demo Test', async ({ page }) => {
-        await test.step('Step 1', async () => {
-            console.log("This is Demo Test 2 - Step -1");
-        });
-
-        await test.step('Step 2', async () => {
-            console.log("This is Demo Test 2 - Step -2");
-        });
-    });
-
-    test('Demo Test -3 @feature:Demo-Feature @story:Demo-story', async ({ page }) => {
-        await test.step('This is Demo test 3', async () => {
-            console.log('This is Demo Test 3 Step - 1');
-        })
-
-    });
-
 });

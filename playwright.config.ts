@@ -26,8 +26,8 @@ export default defineConfig({
 
   timeout: 30000, // 30 seconds - Max time for each test
   /* Opt out of parallel tests on CI. */
-  // workers: process.env.CI ? 1 : 4,
-  workers: 1,
+  workers: process.env.CI ? 1 : 4,
+  //workers: 4,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['list'],

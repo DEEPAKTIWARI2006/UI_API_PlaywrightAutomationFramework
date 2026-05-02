@@ -5,6 +5,7 @@
 // token is sent in the Authorization header as a Bearer token.
 // The server validates the token and grants access if it's valid.
 
+import { test, expect } from '@playwright/test';
 
 test('Bearer Token Example', async ({ request }) => {
     const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...'; // Your JWT

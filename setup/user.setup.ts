@@ -11,6 +11,7 @@ test('login as user', async ({ page }) => {
     await page.click('#login');
 
     await page.waitForURL('**/home');
+    await page.waitForEvent('networkidle', true);
 
     await page.context().storageState({ path: 'storage/user.json' });
 

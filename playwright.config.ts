@@ -14,12 +14,17 @@ import { defineConfig, devices } from '@playwright/test';
 export default defineConfig({
   testDir: './tests',
   /* Run tests in files in parallel */
-  fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!process.env.CI,
+  fullyParallel: true, // Runs tests in parallel inside files too.
+  maxFailures: 50, // Stop the test suite after 5 failures
+  forbidOnly: !!process.env.CI, /* Fail the build on CI if you accidentally left test.only in the source code. */
   /* Retry on CI only */
   // retries: process.env.CI ? 2 : 0,
   retries: 0,
+
+  // Where artifacts (screenshots, videos) are stored
+  outputDir: 'test-results/',
+
+  timeout: 30000, // 30 seconds - Max time for each test
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : 4,
   workers: 1,
@@ -34,14 +39,25 @@ export default defineConfig({
     // baseURL: 'http://localhost:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    browserName: 'chromium',
+    trace: 'on-first-retry', // Debug trace only on first retry of a failed test
     // trace: 'off',
+    viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
-    actionTimeout: 5000,
-    headless: true
+    actionTimeout: 5000, //Max time for actions like click, fill etc.
+    headless: true,
+    navigationTimeout: 30000 //Max time for page load
+  },
+
+  // Configure assertions timeout
+  expect: {
+    timeout: 5000
   },
 
   /* Configure projects for major browsers */
+
+  //   Used for:
+  // Cross-browser testing , Multiple environments
   projects: [
     {
       name: 'chromium',

@@ -5,11 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "npx playwright test",
+    "test:uat": "set TEST_ENV=qa && npx playwright test",
     "show-report": "allure serve allure-results",
     "test:chromium": "npx playwright test --project=chromium",
     "test:firefox": "npx playwright test --project=firefox",
     "test:firefox:headed": "npx playwright test --project=firefox --headed",
     "test:chromium:headed": "npx playwright test --project=chromium --headed",
+    "test:chromium:headed:uat": "set TEST_ENV=uat && npx playwright test --project=chromium --headed",
     "test:smoke": "npx playwright test --grep \"@smoke\"",
     "test:regression": "npx playwright test --grep \"@regression\"",
     "test:ui": "npx playwright test --project=ui",

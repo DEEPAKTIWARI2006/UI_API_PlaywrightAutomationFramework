@@ -1,7 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
 
-
 export class IndexPage extends BasePage {
 
   readonly signupEmailInput: Locator;
@@ -15,10 +14,10 @@ export class IndexPage extends BasePage {
     this.pageHeader = page.getByRole('heading', { name: 'Automation Demo Site' });
   }
 
-  async signup(username: string) {
+  async signup(data: any) {
 
     await this.click(this.signupEmailInput);
-    await this.fill(this.signupEmailInput, username);
+    await this.fill(this.signupEmailInput, data.email);
     await this.click(this.SignupButton);
   }
 

@@ -74,30 +74,30 @@ export class RegisterPage extends BasePage {
   }
 
 
-  async register() {
+  async register(data: any) {
     await this.click(this.firstNameInput);
-    await this.fill(this.firstNameInput, "DEEPAK");
+    await this.fill(this.firstNameInput, data.firstName);
     await this.click(this.lastNameInput);
-    await this.fill(this.lastNameInput, "SPORTY");
+    await this.fill(this.lastNameInput, data.lastName);
     await this.click(this.addressInput);
-    await this.fill(this.addressInput, "Noida, India");
+    await this.fill(this.addressInput, data.address);
     await this.click(this.emailInput);
-    await this.fill(this.emailInput, "deepak.sporty@example.com");
+    await this.fill(this.emailInput, data.email);
     await this.click(this.phoneInput);
-    await this.fill(this.phoneInput, "1234567890");
-    await this.selectGender("Male")
-    await this.selectHobby("Cricket")
-    await this.selectLanguage("English");
+    await this.fill(this.phoneInput, data.phone);
+    await this.selectGender(data.gender)
+    await this.selectHobby(data.hobby)
+    await this.selectLanguage(data.language);
     await this.click(this.phoneInput);
-    await this.selectSkills("Java");
-    await this.selectCountry("India");
-    await this.selectDOBYear("1990");
-    await this.selectDOBMonth("January");
-    await this.selectDOBDay("1");
+    await this.selectSkills(data.skills);
+    await this.selectCountry(data.country);
+    await this.selectDOBYear(data.dob_year);
+    await this.selectDOBMonth(data.dob_month);
+    await this.selectDOBDay(data.dob_day);
     await this.click(this.passwordInput);
-    await this.fill(this.passwordInput, "Password123");
+    await this.fill(this.passwordInput, data.password);
     await this.click(this.confirmPasswordInput);
-    await this.fill(this.confirmPasswordInput, "Password123");
+    await this.fill(this.confirmPasswordInput, data.confirmPassword);
     await this.click(this.submitButton);
     await this.page.screenshot({ path: 'screenshots/Error_Message.png', fullPage: true });
   }

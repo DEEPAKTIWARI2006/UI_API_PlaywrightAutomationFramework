@@ -14,11 +14,11 @@ export class LoginPage extends BasePage {
         this.loginButton = page.getByRole('button', { name: 'Login' });
     }
 
-    async login(username: string, password: string) {
+    async login(data: any) {
 
 
-        await this.fill(this.usernameInput, username);
-        await this.fill(this.passwordInput, password);
+        await this.fill(this.usernameInput, data.username);
+        await this.fill(this.passwordInput, data.password);
         await this.click(this.loginButton);
         await this.waitForURLContains('dashboard');
         await this.page.context().storageState({ path: 'storage/admin.json' });

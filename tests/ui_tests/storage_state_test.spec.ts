@@ -1,5 +1,10 @@
 import { test, expect } from '../../fixtures/baseTest';
 import { applyAllureTags } from '../../utils/allureTags';
+import { config } from '../../configs/index';
+import DataManager from '../../utils/DataManager';
+
+const login = await DataManager.getPageData('LoginData');
+const data = { login };
 
 test.describe('Login & Storage State functionality test set', () => {
 
@@ -13,8 +18,8 @@ test.describe('Login & Storage State functionality test set', () => {
         await test.step('Entering Email ID to Sign Up', async () => {
             // Block image loading
             await page.route('**/*.{png,jpg,jpeg,svg,gif}', route => route.abort());
-            await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
-            await app.loginPage.login("Admin", "admin123"); //login and save storage state in admin.json file
+            await page.goto(config.ui.baseUrl3);
+            await app.loginPage.login(data.login.validUser); //login and save storage state in admin.json file
         });
 
         await test.step('Validate Dashboard is displayed', async () => {
@@ -25,7 +30,7 @@ test.describe('Login & Storage State functionality test set', () => {
     test.only(`Use StorageState to skip login @admin @feature:Dashboard @story:Skip Login @severity:critical`, async ({ app, page }) => {
 
         await test.step('Entering Email ID to Sign Up', async () => {
-            await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index');
+            await page.goto(config.ui.baseUrl3);
         });
 
         await test.step('Validate Dashboard is displayed', async () => {

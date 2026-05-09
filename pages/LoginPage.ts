@@ -3,23 +3,16 @@ import { BasePage } from './BasePage';
 
 export class LoginPage extends BasePage {
 
-    readonly usernameInput: Locator;
-    readonly passwordInput: Locator;
-    readonly loginButton: Locator;
-
     constructor(page: Page) {
         super(page);
-        this.usernameInput = page.getByPlaceholder('Username');
-        this.passwordInput = page.getByPlaceholder('Password');
-        this.loginButton = page.getByRole('button', { name: 'Login' });
+
     }
 
     async login(data: any) {
 
-
-        await this.fill(this.usernameInput, data.username);
-        await this.fill(this.passwordInput, data.password);
-        await this.click(this.loginButton);
+        await this.page.getByPlaceholder('Username').fill(data.username);
+        await this.page.getByPlaceholder('Password').fill(data.password);
+        await this.page.getByRole('button', { name: 'Login' }).click();
         await this.waitForURLContains('dashboard');
         await this.page.context().storageState({ path: 'storage/admin.json' });
     }

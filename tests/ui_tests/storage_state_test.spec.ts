@@ -27,10 +27,12 @@ test.describe('Login & Storage State functionality test set', () => {
         });
     });
 
-    test.only(`Use StorageState to skip login @admin @feature:Dashboard @story:Skip Login @severity:critical`, async ({ app, page }) => {
+    test.use({ storageState: 'storage/admin.json' });
+
+    test(`Use StorageState to skip login @admin @feature:Dashboard @story:Skip Login @severity:critical`, async ({ app, page }) => {
 
         await test.step('Entering Email ID to Sign Up', async () => {
-            await page.goto(config.ui.baseUrl3);
+            await page.goto(config.ui.dashboardUrl);
         });
 
         await test.step('Validate Dashboard is displayed', async () => {

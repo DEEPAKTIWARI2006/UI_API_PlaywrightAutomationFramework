@@ -3,6 +3,7 @@ export default {
         baseUrl1: "https://demo.automationtesting.in",
         baseUrl2: "https://demo.automationtesting.in/Register.html",
         baseUrl3: "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login",
+        dashboardUrl: "https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index",
         dataPath: "qa-data"
     },
     api: {

@@ -1,7 +1,7 @@
 const LoginData = {
     validUser: {
-        username: "UAT_default.user",
-        password: "UAT_Pass123@",
+        username: "Admin",
+        password: "admin123",
         email: "UAT_alibaba@getMaxListeners.com"
     },
 

@@ -1,7 +1,7 @@
 const LoginData = {
     validUser: {
-        username: "QA_default.user",
-        password: "QA_Pass123@",
+        username: "Admin",
+        password: "admin123",
         email: "QA_alibaba@getMaxListeners.com"
     },
 

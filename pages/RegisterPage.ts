@@ -3,27 +3,8 @@ import { BasePage } from './BasePage';
 
 export class RegisterPage extends BasePage {
 
-  readonly firstNameInput: Locator;
-  readonly lastNameInput: Locator;
-  readonly emailInput: Locator;
-  readonly addressInput: Locator;
-  readonly phoneInput: Locator;
-  readonly countryDropdown: Locator;
-  readonly passwordInput: Locator;
-  readonly confirmPasswordInput: Locator;
-  readonly submitButton: Locator;
-
   constructor(page: Page) {
     super(page);
-    this.firstNameInput = page.getByRole('textbox', { name: 'First Name' });
-    this.lastNameInput = page.getByRole('textbox', { name: 'Last Name' });
-    this.emailInput = page.locator('input[type="email"]');
-    this.addressInput = page.locator('textarea');
-    this.phoneInput = page.locator('input[type="tel"]');
-    this.countryDropdown = page.locator('#countries');
-    this.passwordInput = this.page.locator('#firstpassword');
-    this.confirmPasswordInput = this.page.locator('#secondpassword');
-    this.submitButton = this.page.getByRole('button', { name: 'Submit' });
   }
 
 
@@ -63,7 +44,7 @@ export class RegisterPage extends BasePage {
 
   async isErrorMessageDisplayed(): Promise<{ valid: boolean; message: string }> {
 
-    const errorTextActual = this.countryDropdown.evaluate((el: any) => {
+    const errorTextActual = this.page.locator('#countries').evaluate((el: any) => {
       return {
         valid: el.checkValidity(),
         message: el.validationMessage
@@ -75,30 +56,30 @@ export class RegisterPage extends BasePage {
 
 
   async register(data: any) {
-    await this.click(this.firstNameInput);
-    await this.fill(this.firstNameInput, data.firstName);
-    await this.click(this.lastNameInput);
-    await this.fill(this.lastNameInput, data.lastName);
-    await this.click(this.addressInput);
-    await this.fill(this.addressInput, data.address);
-    await this.click(this.emailInput);
-    await this.fill(this.emailInput, data.email);
-    await this.click(this.phoneInput);
-    await this.fill(this.phoneInput, data.phone);
+    await this.page.getByRole('textbox', { name: 'First Name' }).click();
+    await this.page.getByRole('textbox', { name: 'First Name' }).fill(data.firstName);
+    await this.page.getByRole('textbox', { name: 'Last Name' }).click();
+    await this.page.getByRole('textbox', { name: 'Last Name' }).fill(data.lastName);
+    await this.page.locator('textarea').click();
+    await this.page.locator('textarea').fill(data.address);
+    await this.page.getByRole('textbox', { name: 'Email' }).click();
+    await this.page.getByRole('textbox', { name: 'Email' }).fill(data.email);
+    await this.page.getByRole('textbox', { name: 'Phone' }).click();
+    await this.page.getByRole('textbox', { name: 'Phone' }).fill(data.phone);
     await this.selectGender(data.gender)
     await this.selectHobby(data.hobby)
     await this.selectLanguage(data.language);
-    await this.click(this.phoneInput);
+    await this.page.locator('input[type="tel"]').click();
     await this.selectSkills(data.skills);
     await this.selectCountry(data.country);
     await this.selectDOBYear(data.dob_year);
     await this.selectDOBMonth(data.dob_month);
     await this.selectDOBDay(data.dob_day);
-    await this.click(this.passwordInput);
-    await this.fill(this.passwordInput, data.password);
-    await this.click(this.confirmPasswordInput);
-    await this.fill(this.confirmPasswordInput, data.confirmPassword);
-    await this.click(this.submitButton);
+    await this.page.locator('#firstpassword').click();
+    await this.page.locator('#firstpassword').fill(data.password);
+    await this.page.locator('#secondpassword').click();
+    await this.page.locator('#secondpassword').fill(data.confirmPassword);
+    await this.page.getByRole('button', { name: 'Submit' }).click();
     await this.page.screenshot({ path: 'screenshots/Error_Message.png', fullPage: true });
   }
 

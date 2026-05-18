@@ -1,5 +1,7 @@
-import { Page, Locator } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { HealingEngine } from '../core-ui/HealingEngine';
+import { RegisterPageLocators } from '../locators/RegisterPage.locators';
 
 export class RegisterPage extends BasePage {
 
@@ -7,80 +9,230 @@ export class RegisterPage extends BasePage {
     super(page);
   }
 
-
   async selectGender(gender: string) {
-    await this.page.getByRole('radio', { name: `${gender}`, exact: true }).click();
+
+    const genderLocator =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.gender(gender)
+      );
+
+    await genderLocator.click();
   }
 
   async selectHobby(hobby: string) {
-    await this.page.locator(`input[type="checkbox"][value="${hobby}"]`).click();
+
+    const hobbyLocator =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.hobby(hobby)
+      );
+
+    await hobbyLocator.click();
   }
 
   async selectLanguage(language: string) {
-    await this.page.locator('#msdd').click();
-    await this.page.getByText(language).click();
+
+    const languageDropdown =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.languageDropdown
+      );
+
+    await languageDropdown.click();
+
+    const languageOption =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.languageOption(language)
+      );
+
+    await languageOption.click();
   }
 
   async selectSkills(skills: string) {
-    await this.page.locator('#Skills').selectOption(skills);
+
+    const skillsDropdown =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.skills
+      );
+
+    await skillsDropdown.selectOption(skills);
   }
 
   async selectCountry(country: string) {
-    await this.page.locator('.select2-selection__arrow').click();
-    await this.page.getByRole('treeitem', { name: `${country}` }).click();
+
+    const countryDropdown =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.countryDropdown
+      );
+
+    await countryDropdown.click();
+
+    const countryOption =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.countryOption(country)
+      );
+
+    await countryOption.click();
   }
 
   async selectDOBYear(dob_year: string) {
-    await this.page.locator('#yearbox').selectOption(dob_year)
+
+    const dobYear =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.dobYear
+      );
+
+    await dobYear.selectOption(dob_year);
   }
 
   async selectDOBMonth(dob_month: string) {
-    await this.page.getByRole('combobox').nth(4).selectOption(dob_month);
+
+    const dobMonth =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.dobMonth
+      );
+
+    await dobMonth.selectOption(dob_month);
   }
 
   async selectDOBDay(dob_day: string) {
-    await this.page.locator('#daybox').selectOption(dob_day);
+
+    const dobDay =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.dobDay
+      );
+
+    await dobDay.selectOption(dob_day);
   }
 
-  async isErrorMessageDisplayed(): Promise<{ valid: boolean; message: string }> {
+  async isErrorMessageDisplayed():
+    Promise<{ valid: boolean; message: string }> {
 
-    const errorTextActual = this.page.locator('#countries').evaluate((el: any) => {
-      return {
-        valid: el.checkValidity(),
-        message: el.validationMessage
-      };
-    });
+    const countriesValidation =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.countriesValidation
+      );
+
+    const errorTextActual =
+      countriesValidation.evaluate((el: any) => {
+
+        return {
+          valid: el.checkValidity(),
+          message: el.validationMessage
+        };
+      });
 
     return errorTextActual;
   }
 
-
   async register(data: any) {
-    await this.page.getByRole('textbox', { name: 'First Name' }).click();
-    await this.page.getByRole('textbox', { name: 'First Name' }).fill(data.firstName);
-    await this.page.getByRole('textbox', { name: 'Last Name' }).click();
-    await this.page.getByRole('textbox', { name: 'Last Name' }).fill(data.lastName);
-    await this.page.locator('textarea').click();
-    await this.page.locator('textarea').fill(data.address);
-    await this.page.getByRole('textbox', { name: 'Email' }).click();
-    await this.page.getByRole('textbox', { name: 'Email' }).fill(data.email);
-    await this.page.getByRole('textbox', { name: 'Phone' }).click();
-    await this.page.getByRole('textbox', { name: 'Phone' }).fill(data.phone);
-    await this.selectGender(data.gender)
-    await this.selectHobby(data.hobby)
+
+    // First Name
+    const firstName =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.firstName
+      );
+
+    await firstName.fill(data.firstName);
+
+    // Last Name
+    const lastName =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.lastName
+      );
+
+    await lastName.fill(data.lastName);
+
+    // Address
+    const address =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.address
+      );
+
+    await address.fill(data.address);
+
+    // Email
+    const email =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.email
+      );
+
+    await email.fill(data.email);
+
+    // Phone
+    const phone =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.phone
+      );
+
+    await phone.fill(data.phone);
+
+    // Gender
+    await this.selectGender(data.gender);
+
+    // Hobby
+    await this.selectHobby(data.hobby);
+
+    // Language
     await this.selectLanguage(data.language);
-    await this.page.locator('input[type="tel"]').click();
+
+    // Skills
     await this.selectSkills(data.skills);
+
+    // Country
     await this.selectCountry(data.country);
+
+    // DOB
     await this.selectDOBYear(data.dob_year);
     await this.selectDOBMonth(data.dob_month);
     await this.selectDOBDay(data.dob_day);
-    await this.page.locator('#firstpassword').click();
-    await this.page.locator('#firstpassword').fill(data.password);
-    await this.page.locator('#secondpassword').click();
-    await this.page.locator('#secondpassword').fill(data.confirmPassword);
-    await this.page.getByRole('button', { name: 'Submit' }).click();
-    await this.page.screenshot({ path: 'screenshots/Error_Message.png', fullPage: true });
-  }
 
+    // Password
+    const password =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.password
+      );
+
+    await password.fill(data.password);
+
+    // Confirm Password
+    const confirmPassword =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.confirmPassword
+      );
+
+    await confirmPassword.fill(
+      data.confirmPassword
+    );
+
+    // Submit Button
+    const submitButton =
+      await HealingEngine.getLocator(
+        this.page,
+        RegisterPageLocators.submitButton
+      );
+
+    await submitButton.click();
+
+    await this.page.screenshot({
+      path: 'screenshots/Error_Message.png',
+      fullPage: true
+    });
+  }
 }

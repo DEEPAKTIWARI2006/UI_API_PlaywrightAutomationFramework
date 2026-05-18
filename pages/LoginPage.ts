@@ -1,24 +1,36 @@
-import { Page, Locator } from '@playwright/test';
+import { Page } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { HealingEngine } from '../core-ui/HealingEngine';
+import { LoginPageLocators } from '../locators/LoginPage.locators';
 
 export class LoginPage extends BasePage {
 
     constructor(page: Page) {
         super(page);
-
     }
 
     async login(data: any) {
 
-        await this.page.getByPlaceholder('Username').fill(data.username);
-        await this.page.getByPlaceholder('Password').fill(data.password);
-        await this.page.getByRole('button', { name: 'Login' }).click();
+        // Username
+        const usernameField = await HealingEngine.getLocator(this.page, LoginPageLocators.username);
+        await usernameField.fill(data.username);
+
+        // Password
+        const passwordField = await HealingEngine.getLocator(this.page, LoginPageLocators.password);
+        await passwordField.fill(data.password);
+
+        // Login Button
+        const loginButton = await HealingEngine.getLocator(this.page, LoginPageLocators.loginButton);
+        await loginButton.click();
+
         await this.waitForURLContains('dashboard');
-        await this.page.context().storageState({ path: 'storage/admin.json' });
+
+        await this.page.context().storageState({
+            path: 'storage/admin.json'
+        });
     }
 
-    dashboardHeader() {
-        return this.page.getByRole('heading', { name: 'Dashboard' });
+    getDashboardHeader() {
+        return HealingEngine.getLocator(this.page, LoginPageLocators.dashboardHeader);
     }
-
 }

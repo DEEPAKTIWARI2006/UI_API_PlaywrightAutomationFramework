@@ -18,12 +18,15 @@ test.describe('Login & Storage State functionality test set', () => {
         await test.step('Entering Email ID to Sign Up', async () => {
             // Block image loading
             await page.route('**/*.{png,jpg,jpeg,svg,gif}', route => route.abort());
+            console.log('Navigating to Login Page' + config.ui.baseUrl3);
+            page.context().clearCookies();
             await page.goto(config.ui.baseUrl3);
+            await page.waitForLoadState('networkidle');
             await app.loginPage.login(data.login.validUser); //login and save storage state in admin.json file
         });
 
         await test.step('Validate Dashboard is displayed', async () => {
-            await expect(app.loginPage.dashboardHeader()).toBeVisible();
+            await expect(await app.loginPage.getDashboardHeader()).toBeVisible();
         });
     });
 
@@ -36,7 +39,7 @@ test.describe('Login & Storage State functionality test set', () => {
         });
 
         await test.step('Validate Dashboard is displayed', async () => {
-            await expect(app.loginPage.dashboardHeader()).toBeVisible();
+            await expect(await app.loginPage.getDashboardHeader()).toBeVisible();
         });
     });
 });

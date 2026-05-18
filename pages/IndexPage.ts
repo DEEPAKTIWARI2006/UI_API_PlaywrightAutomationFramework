@@ -1,5 +1,7 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage';
+import { HealingEngine } from '../core-ui/HealingEngine';
+import { IndexPageLocators } from '../locators/IndexPage.locators';
 
 export class IndexPage extends BasePage {
 
@@ -9,9 +11,11 @@ export class IndexPage extends BasePage {
 
   async signup(data: any) {
 
-    await this.page.getByRole('textbox', { name: 'Email id for Sign Up' }).click();
-    await this.page.getByRole('textbox', { name: 'Email id for Sign Up' }).fill(data.email);
-    await this.page.getByRole('button', { name: 'Sign Up' }).click();
+    const emailidField = await HealingEngine.getLocator(this.page, IndexPageLocators.emailid);
+    await emailidField.fill(data.email);
+
+    const signupButton = await HealingEngine.getLocator(this.page, IndexPageLocators.signup);
+    await signupButton.click();
   }
 
 }

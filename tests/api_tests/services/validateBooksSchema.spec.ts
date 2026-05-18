@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { booksSchema } from '../../../schemas/bookstore-service/getBooks.response.schema';
-import { validateSchema } from '../../../api-core/schemaValidator';
+import { validateSchema } from '../../../core-api/schemaValidator';
 
 test('Validate Books Contract @feature:API_Testing @story:Validate books API Schema @severity:critical', async ({ request }) => {
 

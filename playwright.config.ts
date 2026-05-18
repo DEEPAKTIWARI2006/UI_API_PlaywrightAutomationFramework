@@ -24,7 +24,7 @@ export default defineConfig({
   // Where artifacts (screenshots, videos) are stored
   outputDir: 'test-results/',
 
-  timeout: 30000, // 30 seconds - Max time for each test
+  timeout: 60000, // 60 seconds - Max time for each test
   /* Opt out of parallel tests on CI. */
   // workers: process.env.CI ? 1 : 4,
   workers: 1,
@@ -44,9 +44,9 @@ export default defineConfig({
     // trace: 'off',
     viewport: { width: 1280, height: 720 },
     screenshot: 'only-on-failure',
-    actionTimeout: 5000, //Max time for actions like click, fill etc.
+    actionTimeout: 10000, //Max time for actions like click, fill etc.
     headless: true,
-    navigationTimeout: 30000 //Max time for page load
+    navigationTimeout: 60000 //Max time for page load
   },
 
   // Configure assertions timeout
@@ -63,6 +63,15 @@ export default defineConfig({
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
+
+    {
+      name: 'chromium-slow',
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: { slowMo: 1000 }
+      },
+    },
+
 
     { name: 'ui', testDir: './tests/ui' },
     { name: 'api', testDir: './tests/api' },
